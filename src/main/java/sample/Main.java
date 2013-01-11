@@ -23,7 +23,7 @@ public class Main {
 
     // beta or production environment
 
-    public static final String SERVER_CLUSTER = "https://api-stable.ingenuity.com";
+    public static final String SERVER_CLUSTER = "https://developer.ingenuity.com";
 //    public static final String SERVER_CLUSTER = "https://api.ingenuity.com";
 
     public static final String ACCESS_URI = SERVER_CLUSTER + "/datastream/api/v1/oauth/access_token";
