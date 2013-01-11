@@ -71,6 +71,7 @@ public class Main {
         multiPart.field("access_token", accessToken);
 
         // replace with your actual experiment files
+        // use StreamDataBodyPart if prefer not referencing a file
 
         multiPart.bodyPart(new FileDataBodyPart("testId001", new File("src/main/resources/isatab/testId001.zip")));
         multiPart.bodyPart(new FileDataBodyPart("testId002", new File("src/main/resources/isatab/testId002.zip")));
