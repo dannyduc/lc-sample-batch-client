@@ -3,7 +3,10 @@ package sample;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.client.apache.ApacheHttpClient;
+import com.sun.jersey.client.apache.config.DefaultApacheHttpClientConfig;
 import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.file.DefaultMediaTypePredictor;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 import org.apache.commons.io.IOUtils;
 
@@ -35,7 +38,13 @@ public class Main {
     static final String clientId = "xxx";
     static final String clientSecret = "xxx";
 
-    static final Client client = Client.create();
+    static Client client;
+    static {
+        DefaultApacheHttpClientConfig cc = new DefaultApacheHttpClientConfig();
+//        cc.getProperties().put(DefaultApacheHttpClientConfig.PROPERTY_PROXY_URI, "http://172.30.1.10:8080/");
+        client = ApacheHttpClient.create(cc);
+    }
+
     static final ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -73,8 +82,9 @@ public class Main {
         // replace with your actual experiment files
         // use StreamDataBodyPart if prefer not to use a file
 
-        multiPart.bodyPart(new FileDataBodyPart("testId001", new File("src/main/resources/isatab/testId001.zip")));
-        multiPart.bodyPart(new FileDataBodyPart("testId002", new File("src/main/resources/isatab/testId002.zip")));
+        MediaType zipType = DefaultMediaTypePredictor.CommonMediaTypes.ZIP.getMediaType();
+        multiPart.bodyPart(new FileDataBodyPart("testId001", new File("src/main/resources/isatab/testId001.zip"), zipType));
+        multiPart.bodyPart(new FileDataBodyPart("testId002", new File("src/main/resources/isatab/testId002.zip"), zipType));
 
         ClientResponse clientResponse = client.resource(BATCH_URI)
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
@@ -96,6 +106,7 @@ public class Main {
 
         String status = parseJson(json, "status");
 
+        System.out.println(json);
         System.out.println("status: " + status);
 
         return "DONE".equals(status);

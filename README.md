@@ -16,3 +16,7 @@ https://developer.ingenuity.com/datastream/developers/myapps.html
 To build and execute:
 
     mvn -Dexec.mainClass=sample.Main compile exec:java
+
+To generate single jar:
+
+    mvn package assembly:single
