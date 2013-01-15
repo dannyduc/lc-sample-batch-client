@@ -19,4 +19,10 @@ To build and execute:
 
 To generate single jar:
 
-    mvn package assembly:single
+    mvn compile assembly:single
+    
+To generate library dependencies (dependency:copy) and execute
+
+    mvn package    
+    cd target
+    java -jar batch-client.jar
