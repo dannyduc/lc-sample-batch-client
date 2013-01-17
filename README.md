@@ -17,10 +17,6 @@ To build and execute:
 
     mvn -Dexec.mainClass=sample.Main compile exec:java
 
-To generate single jar:
-
-    mvn compile assembly:single
-    
 To generate library dependencies (dependency:copy) and execute
 
     mvn package    

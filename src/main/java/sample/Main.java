@@ -82,9 +82,8 @@ public class Main {
         // replace with your actual experiment files
         // use StreamDataBodyPart if prefer not to use a file
 
-        MediaType zipType = DefaultMediaTypePredictor.CommonMediaTypes.ZIP.getMediaType();
-        multiPart.bodyPart(new FileDataBodyPart("testId001", new File("src/main/resources/isatab/testId001.zip"), zipType));
-        multiPart.bodyPart(new FileDataBodyPart("testId002", new File("src/main/resources/isatab/testId002.zip"), zipType));
+        multiPart.bodyPart(new FileDataBodyPart("testId001", new File("src/main/resources/isatab/testId001.zip")));
+        multiPart.bodyPart(new FileDataBodyPart("testId002", new File("src/main/resources/isatab/testId002.zip")));
 
         ClientResponse clientResponse = client.resource(BATCH_URI)
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
